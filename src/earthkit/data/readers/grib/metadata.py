@@ -170,7 +170,10 @@ class GribFieldGeography(Geography):
             y = self.metadata.get("DyInDegrees")
             x = round(x * 1_000_000) / 1_000_000
             y = round(y * 1_000_000) / 1_000_000
-            assert x == y, (x, y)
+            # assert x == y, (x, y)  ## This has been removed on purpose! NOT TESTED extensively!
+            if not x == y:
+                print("!!!CAUTION!!!")
+                print("Earthkit is not able to work on unequal x- and y-resolutions. Moving on with hardcoded values!")
             return x
 
         if grid_type in ["lambert", "lambert_azimuthal_equal_area"]:
